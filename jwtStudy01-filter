@@ -5,5 +5,74 @@ $ ls
 SpringBootSecurityJwtApplication.java  controllers/  models/  payload/  repository/  security/
 
 
-filter
+filter 
 ```
+Searching 18 files for "filter"
+
+D:\githubcode\spring-boot-spring-security-jwt-authentication-master\src\main\java\com\bezkoder\springjwt\security\jwt\AuthTokenFilter.java:
+    3  import java.io.IOException;
+    4  
+    5: import javax.servlet.FilterChain;
+    6  import javax.servlet.ServletException;
+    7  import javax.servlet.http.HttpServletRequest;
+    .
+   16  import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+   17  import org.springframework.util.StringUtils;
+   18: import org.springframework.web.filter.OncePerRequestFilter;
+   19  
+   20  import com.bezkoder.springjwt.security.services.UserDetailsServiceImpl;
+   21  
+   22: public class AuthTokenFilter extends OncePerRequestFilter {
+   23    @Autowired
+   24    private JwtUtils jwtUtils;
+   ..
+   27    private UserDetailsServiceImpl userDetailsService;
+   28  
+   29:   private static final Logger logger = LoggerFactory.getLogger(AuthTokenFilter.class);
+   30  
+   31    @Override
+   32:   protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+   33        throws ServletException, IOException {
+   34      try {
+   ..
+   51      }
+   52  
+   53:     filterChain.doFilter(request, response);
+   54    }
+   55  
+
+D:\githubcode\spring-boot-spring-security-jwt-authentication-master\src\main\java\com\bezkoder\springjwt\security\WebSecurityConfig.java:
+   15  import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+   16  import org.springframework.security.crypto.password.PasswordEncoder;
+   17: import org.springframework.security.web.SecurityFilterChain;
+   18: import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+   19  
+   20  import com.bezkoder.springjwt.security.jwt.AuthEntryPointJwt;
+   21: import com.bezkoder.springjwt.security.jwt.AuthTokenFilter;
+   22  import com.bezkoder.springjwt.security.services.UserDetailsServiceImpl;
+   23  
+   ..
+   35  
+   36    @Bean
+   37:   public AuthTokenFilter authenticationJwtTokenFilter() {
+   38:     return new AuthTokenFilter();
+   39    }
+   40  
+   ..
+   79  //      .anyRequest().authenticated();
+   80  //
+   81: //    http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+   82  //  }
+   83    
+   84    @Bean
+   85:   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+   86      http.cors().and().csrf().disable()
+   87          .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+   ..
+   93      http.authenticationProvider(authenticationProvider());
+   94  
+   95:     http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+   96      
+   97      return http.build();
+
+25 matches across 2 files
