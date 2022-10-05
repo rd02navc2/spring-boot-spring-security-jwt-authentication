@@ -5,6 +5,19 @@ $ ls
 SpringBootSecurityJwtApplication.java  controllers/  models/  payload/  repository/  security/
 
 
+filter
+```
+ public class LogRequestIdFilter extends OncePerRequestFilter { /** 繼承OncePerRequestFilter，確保request只會被filter過濾一次 */ ...
+            ```
+            LogRequestIdFilter
+            ```
+            /**
+             * 用來給每個Request一個ID，便於用來追蹤問題
+             * 參考 https://medium.com/@d.lopez.j/spring-boot-setting-a-unique-id-per-request-dd648efef2b
+             */
+
+
+
 filter 
 ```
 Searching 18 files for "filter"
