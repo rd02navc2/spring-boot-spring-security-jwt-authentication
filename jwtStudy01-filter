@@ -5,7 +5,7 @@ $ ls
 SpringBootSecurityJwtApplication.java  controllers/  models/  payload/  repository/  security/
 
 
-filter
+filter ... Chase
 ```
  public class LogRequestIdFilter extends OncePerRequestFilter { /** 繼承OncePerRequestFilter，確保request只會被filter過濾一次 */ ...
             ```
